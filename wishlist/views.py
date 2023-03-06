@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from . import models
+from django.views.generic.list import ListView
+from wishlist.models import Wishlist
+from django.contrib.auth.mixins import LoginRequiredMixin
+from products.models import Product
 
 
 def get_wishlists(request, *args, **kwargs):
@@ -18,7 +22,7 @@ def add_to_wishlist(request, slug):
     return redirect(get_wishlists)
 
 
-class WishListView (ListView):
+class WishListView(ListView):
     model = Wishlist
     template_name = 'templates/wishlist.html'
     paginate_by = 10
